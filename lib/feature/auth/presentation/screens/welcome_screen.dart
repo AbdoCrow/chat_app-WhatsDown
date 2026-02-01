@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:chat_app/core/theme/app_colors.dart';
-import 'login_screen.dart';
+import 'package:chat_app/core/router/router.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -58,9 +58,7 @@ class WelcomeScreen extends StatelessWidget {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => const LoginScreen()),
-                    );
+                    context.goToLogin();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.secondary,

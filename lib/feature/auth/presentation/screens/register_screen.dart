@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:chat_app/core/theme/app_colors.dart';
 import 'package:chat_app/core/validation/validators.dart';
-import 'package:chat_app/feature/chat/presentation/screens/home_screen.dart';
+import 'package:chat_app/core/router/router.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -36,10 +37,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       // Simulate registration delay
       Future.delayed(const Duration(seconds: 1), () {
         setState(() => _isLoading = false);
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (_) => const HomeScreen()),
-          (route) => false,
-        );
+        context.goToHome();
       });
     }
   }
@@ -53,7 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: AppColors.primary),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
         ),
       ),
       body: SafeArea(

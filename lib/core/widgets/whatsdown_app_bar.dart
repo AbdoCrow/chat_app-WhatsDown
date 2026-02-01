@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../theme/app_colors.dart';
 
 class WhatsDownAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -26,7 +27,7 @@ class WhatsDownAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: showBackButton
           ? IconButton(
               icon: const Icon(Icons.arrow_back, color: Colors.white),
-              onPressed: onBackPressed ?? () => Navigator.of(context).pop(),
+              onPressed: onBackPressed ?? () => context.pop(),
             )
           : leading,
       title: Text(
@@ -81,7 +82,7 @@ class ChatRoomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leadingWidth: 30,
       leading: IconButton(
         icon: const Icon(Icons.arrow_back, color: Colors.white),
-        onPressed: onBackPressed ?? () => Navigator.of(context).pop(),
+        onPressed: onBackPressed ?? () => context.pop(),
         padding: EdgeInsets.zero,
       ),
       title: InkWell(

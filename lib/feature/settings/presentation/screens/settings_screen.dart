@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:chat_app/core/theme/app_colors.dart';
-import 'package:chat_app/feature/profile/presentation/screens/my_profile_screen.dart';
+import 'package:chat_app/core/router/router.dart';
 import 'package:chat_app/feature/settings/presentation/widgets/settings_tile.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -13,7 +14,7 @@ class SettingsScreen extends StatelessWidget {
         backgroundColor: AppColors.primary,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
         ),
         title: const Text('Settings', style: TextStyle(color: Colors.white)),
         actions: [
@@ -28,9 +29,7 @@ class SettingsScreen extends StatelessWidget {
           // Profile section
           InkWell(
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const MyProfileScreen()),
-              );
+              context.goToProfile();
             },
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -255,7 +254,7 @@ class _SettingsDetailScreen extends StatelessWidget {
         backgroundColor: AppColors.primary,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
         ),
         title: Text(title, style: const TextStyle(color: Colors.white)),
       ),

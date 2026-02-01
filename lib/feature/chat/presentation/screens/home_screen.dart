@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:chat_app/core/theme/app_colors.dart';
 import 'package:chat_app/feature/chat/presentation/screens/chat_list_screen.dart';
-import 'package:chat_app/feature/chat/presentation/screens/chat_room_screen.dart';
-import 'package:chat_app/feature/settings/presentation/screens/settings_screen.dart';
+import 'package:chat_app/core/router/router.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -111,9 +111,7 @@ class _HomeScreenState extends State<HomeScreen>
             icon: const Icon(Icons.more_vert, color: Colors.white),
             onSelected: (value) {
               if (value == 'settings') {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const SettingsScreen()),
-                );
+                context.goToSettings();
               }
             },
             itemBuilder: (context) => [
@@ -214,7 +212,7 @@ class SelectContactScreen extends StatelessWidget {
         backgroundColor: AppColors.primary,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
         ),
         title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -329,14 +327,8 @@ class SelectContactScreen extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) =>
-                        ChatRoomScreen(name: contact['name']!, imageUrl: null),
-                  ),
-                );
+                context.pop();
+                context.goToChatRoom(name: contact['name']!);
               },
             ),
           ),

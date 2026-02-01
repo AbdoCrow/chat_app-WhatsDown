@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:chat_app/core/theme/app_colors.dart';
 
 class MyProfileScreen extends StatelessWidget {
@@ -11,7 +12,7 @@ class MyProfileScreen extends StatelessWidget {
         backgroundColor: AppColors.primary,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
         ),
         title: const Text('Profile', style: TextStyle(color: Colors.white)),
       ),
