@@ -480,7 +480,7 @@ class _SwitchTileState extends State<_SwitchTile> {
     return SwitchListTile(
       title: Text(widget.title),
       value: _value,
-      activeColor: AppColors.secondary,
+      activeThumbColor: AppColors.secondary,
       onChanged: (value) {
         setState(() {
           _value = value;

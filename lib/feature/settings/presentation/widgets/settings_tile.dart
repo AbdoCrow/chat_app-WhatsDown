@@ -91,7 +91,7 @@ class SettingsSwitchTile extends StatelessWidget {
             )
           : null,
       value: value,
-      activeColor: AppColors.secondary,
+      activeThumbColor: AppColors.secondary,
       onChanged: onChanged,
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
     );
