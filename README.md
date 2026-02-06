@@ -1,6 +1,16 @@
-# What'sDown (I am tired of looking up)
+<h1 align="center">What'sDown (I am tired of looking up)</h1>
+
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/db5095ae-4028-422f-9e20-34600209331d" width="247" height="249" />
+</p>
 
 ## Screenshots
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/5fbd233a-a65b-447a-9fd1-d12c43cad243" width="250"/>
+  <img src="https://github.com/user-attachments/assets/400039fa-c050-490a-b12c-f9af17724ecf" width="250"/>
+  <img src="https://github.com/user-attachments/assets/d9867ad4-fe67-4822-9b50-3ca8bd975fec" width="250"/>
+</p>
 
 ## Features
 
