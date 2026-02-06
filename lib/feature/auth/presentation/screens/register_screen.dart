@@ -40,11 +40,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             _usernameController.text.trim(),
             _passwordController.text,
           );
-
-      final state = ref.read(authControllerProvider);
-      if (state is! AsyncError && mounted) {
-        context.goToHome();
-      }
     }
   }
 
@@ -58,6 +53,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text(next.error.toString())));
+      } else if (previous is AsyncLoading && next is AsyncData) {
+        // Registration successful - navigate to home
+        context.goToHome();
       }
     });
 
@@ -362,7 +360,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       style: TextStyle(color: Colors.grey[600]),
                     ),
                     GestureDetector(
-                      onTap: () => Navigator.pop(context),
+                      onTap: () => context.go('/login'),
                       child: const Text(
                         'Log In',
                         style: TextStyle(

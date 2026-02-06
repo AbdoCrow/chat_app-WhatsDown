@@ -31,11 +31,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       await ref
           .read(authControllerProvider.notifier)
           .login(_emailController.text.trim(), _passwordController.text);
-
-      final state = ref.read(authControllerProvider);
-      if (state is! AsyncError && mounted) {
-        context.goToHome();
-      }
     }
   }
 
@@ -49,6 +44,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text(next.error.toString())));
+      } else if (previous is AsyncLoading && next is AsyncData) {
+        // Login successful - navigate to home
+        context.goToHome();
       }
     });
 

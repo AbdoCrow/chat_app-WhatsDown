@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:chat_app/core/theme/app_theme.dart';
 import 'package:chat_app/core/router/router.dart';
+import 'package:chat_app/core/di/injection.dart';
 
 void main() {
+  configureDependencies(); // Set up dependency injection
   runApp(const ProviderScope(child: MyApp()));
 }
 

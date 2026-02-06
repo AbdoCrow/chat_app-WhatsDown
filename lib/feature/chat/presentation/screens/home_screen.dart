@@ -151,7 +151,11 @@ class _HomeScreenState extends State<HomeScreen>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: const [ChatListScreen()],
+        children: const [
+          ChatListScreen(),
+          Center(child: Text('Status')), //Replace with StatusScreen
+          Center(child: Text('Calls')), //Replace with CallsScreen
+        ],
       ),
       floatingActionButton: ListenableBuilder(
         listenable: _tabController,

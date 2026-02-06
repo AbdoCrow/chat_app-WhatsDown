@@ -21,10 +21,15 @@ UserDto _$UserDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserDto {
-  String get id => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  String get username => throw _privateConstructorUsedError;
-  String? get token => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
+  @JsonKey(name: 'userName')
+  String? get username => throw _privateConstructorUsedError; // Server returns 'userName', map to username
+  String? get token =>
+      throw _privateConstructorUsedError; //this will be used for authentication in future requests
+  String? get profilePictureUrl => throw _privateConstructorUsedError;
+  bool? get online => throw _privateConstructorUsedError;
+  String? get role => throw _privateConstructorUsedError;
 
   /// Serializes this UserDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +45,15 @@ abstract class $UserDtoCopyWith<$Res> {
   factory $UserDtoCopyWith(UserDto value, $Res Function(UserDto) then) =
       _$UserDtoCopyWithImpl<$Res, UserDto>;
   @useResult
-  $Res call({String id, String email, String username, String? token});
+  $Res call({
+    String? id,
+    String? email,
+    @JsonKey(name: 'userName') String? username,
+    String? token,
+    String? profilePictureUrl,
+    bool? online,
+    String? role,
+  });
 }
 
 /// @nodoc
@@ -58,28 +71,43 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? email = null,
-    Object? username = null,
+    Object? id = freezed,
+    Object? email = freezed,
+    Object? username = freezed,
     Object? token = freezed,
+    Object? profilePictureUrl = freezed,
+    Object? online = freezed,
+    Object? role = freezed,
   }) {
     return _then(
       _value.copyWith(
-            id: null == id
+            id: freezed == id
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
-                      as String,
-            email: null == email
+                      as String?,
+            email: freezed == email
                 ? _value.email
                 : email // ignore: cast_nullable_to_non_nullable
-                      as String,
-            username: null == username
+                      as String?,
+            username: freezed == username
                 ? _value.username
                 : username // ignore: cast_nullable_to_non_nullable
-                      as String,
+                      as String?,
             token: freezed == token
                 ? _value.token
                 : token // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            profilePictureUrl: freezed == profilePictureUrl
+                ? _value.profilePictureUrl
+                : profilePictureUrl // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            online: freezed == online
+                ? _value.online
+                : online // ignore: cast_nullable_to_non_nullable
+                      as bool?,
+            role: freezed == role
+                ? _value.role
+                : role // ignore: cast_nullable_to_non_nullable
                       as String?,
           )
           as $Val,
@@ -95,7 +123,15 @@ abstract class _$$UserDtoImplCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
   ) = __$$UserDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String email, String username, String? token});
+  $Res call({
+    String? id,
+    String? email,
+    @JsonKey(name: 'userName') String? username,
+    String? token,
+    String? profilePictureUrl,
+    bool? online,
+    String? role,
+  });
 }
 
 /// @nodoc
@@ -112,28 +148,43 @@ class __$$UserDtoImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? email = null,
-    Object? username = null,
+    Object? id = freezed,
+    Object? email = freezed,
+    Object? username = freezed,
     Object? token = freezed,
+    Object? profilePictureUrl = freezed,
+    Object? online = freezed,
+    Object? role = freezed,
   }) {
     return _then(
       _$UserDtoImpl(
-        id: null == id
+        id: freezed == id
             ? _value.id
             : id // ignore: cast_nullable_to_non_nullable
-                  as String,
-        email: null == email
+                  as String?,
+        email: freezed == email
             ? _value.email
             : email // ignore: cast_nullable_to_non_nullable
-                  as String,
-        username: null == username
+                  as String?,
+        username: freezed == username
             ? _value.username
             : username // ignore: cast_nullable_to_non_nullable
-                  as String,
+                  as String?,
         token: freezed == token
             ? _value.token
             : token // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        profilePictureUrl: freezed == profilePictureUrl
+            ? _value.profilePictureUrl
+            : profilePictureUrl // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        online: freezed == online
+            ? _value.online
+            : online // ignore: cast_nullable_to_non_nullable
+                  as bool?,
+        role: freezed == role
+            ? _value.role
+            : role // ignore: cast_nullable_to_non_nullable
                   as String?,
       ),
     );
@@ -144,27 +195,39 @@ class __$$UserDtoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserDtoImpl extends _UserDto {
   const _$UserDtoImpl({
-    required this.id,
-    required this.email,
-    required this.username,
+    this.id,
+    this.email,
+    @JsonKey(name: 'userName') this.username,
     this.token,
+    this.profilePictureUrl,
+    this.online,
+    this.role,
   }) : super._();
 
   factory _$UserDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserDtoImplFromJson(json);
 
   @override
-  final String id;
+  final String? id;
   @override
-  final String email;
+  final String? email;
   @override
-  final String username;
+  @JsonKey(name: 'userName')
+  final String? username;
+  // Server returns 'userName', map to username
   @override
   final String? token;
+  //this will be used for authentication in future requests
+  @override
+  final String? profilePictureUrl;
+  @override
+  final bool? online;
+  @override
+  final String? role;
 
   @override
   String toString() {
-    return 'UserDto(id: $id, email: $email, username: $username, token: $token)';
+    return 'UserDto(id: $id, email: $email, username: $username, token: $token, profilePictureUrl: $profilePictureUrl, online: $online, role: $role)';
   }
 
   @override
@@ -176,12 +239,25 @@ class _$UserDtoImpl extends _UserDto {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.username, username) ||
                 other.username == username) &&
-            (identical(other.token, token) || other.token == token));
+            (identical(other.token, token) || other.token == token) &&
+            (identical(other.profilePictureUrl, profilePictureUrl) ||
+                other.profilePictureUrl == profilePictureUrl) &&
+            (identical(other.online, online) || other.online == online) &&
+            (identical(other.role, role) || other.role == role));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, email, username, token);
+  int get hashCode => Object.hash(
+    runtimeType,
+    id,
+    email,
+    username,
+    token,
+    profilePictureUrl,
+    online,
+    role,
+  );
 
   /// Create a copy of UserDto
   /// with the given fields replaced by the non-null parameter values.
@@ -199,23 +275,33 @@ class _$UserDtoImpl extends _UserDto {
 
 abstract class _UserDto extends UserDto {
   const factory _UserDto({
-    required final String id,
-    required final String email,
-    required final String username,
+    final String? id,
+    final String? email,
+    @JsonKey(name: 'userName') final String? username,
     final String? token,
+    final String? profilePictureUrl,
+    final bool? online,
+    final String? role,
   }) = _$UserDtoImpl;
   const _UserDto._() : super._();
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$UserDtoImpl.fromJson;
 
   @override
-  String get id;
+  String? get id;
   @override
-  String get email;
+  String? get email;
   @override
-  String get username;
+  @JsonKey(name: 'userName')
+  String? get username; // Server returns 'userName', map to username
   @override
-  String? get token;
+  String? get token; //this will be used for authentication in future requests
+  @override
+  String? get profilePictureUrl;
+  @override
+  bool? get online;
+  @override
+  String? get role;
 
   /// Create a copy of UserDto
   /// with the given fields replaced by the non-null parameter values.

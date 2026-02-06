@@ -33,8 +33,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
 
       return UserDto.fromJson(response.data);
+    } on DioException catch (e) {
+      final message =
+          e.response?.data?['message'] ?? e.message ?? 'Login failed';
+      throw Exception('Failed to login: $message');
     } catch (e) {
-      //this will be changed to a custom exception that we will create later (in errors folder)
       throw Exception('Failed to login: $e');
     }
   }
@@ -51,9 +54,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         data: {'email': email, 'password': password, 'username': username},
       );
       return UserDto.fromJson(response.data);
+    } on DioException catch (e) {
+      final message =
+          e.response?.data?['message'] ?? e.message ?? 'Registration failed';
+      throw Exception('Failed to register: $message');
     } catch (e) {
-      //this will be changed to a custom exception that we will create later (in errors folder)
-      throw Exception('Failed to login: $e');
+      throw Exception('Failed to register: $e');
     }
   }
 }

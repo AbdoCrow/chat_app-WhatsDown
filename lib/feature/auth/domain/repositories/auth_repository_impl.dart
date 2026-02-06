@@ -1,17 +1,18 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:injectable/injectable.dart';
 import 'package:chat_app/core/error/failure.dart';
 import 'package:chat_app/core/error/exceptions.dart';
 import 'package:chat_app/feature/auth/domain/repositories/auth_repository.dart';
 import 'package:chat_app/feature/auth/domain/entities/user_entity.dart';
 import 'package:chat_app/feature/auth/domain/datasources/auth_remote_datasource.dart';
 
+@LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource _remoteDataSource; //used for networking
   final FlutterSecureStorage _secureStorage; //used to store token
   AuthRepositoryImpl(this._remoteDataSource, this._secureStorage);
 
-  //all the voids here will be replaced by userEntity later
   @override
   Future<Either<Failure, UserEntity>> login({
     required String email,
@@ -27,7 +28,6 @@ class AuthRepositoryImpl implements AuthRepository {
         await _secureStorage.write(key: 'auth_token', value: userDto.token);
       }
 
-      // 3. Return success (replace void with userDto.toEntity() later)
       return Right(userDto.toEntity());
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message, statusCode: e.statusCode));

@@ -16,6 +16,9 @@ import 'package:injectable/injectable.dart' as _i526;
 
 import '../../feature/auth/domain/datasources/auth_remote_datasource.dart'
     as _i517;
+import '../../feature/auth/domain/repositories/auth_repository.dart' as _i488;
+import '../../feature/auth/domain/repositories/auth_repository_impl.dart'
+    as _i328;
 import 'register_module.dart' as _i291;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -32,6 +35,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i517.AuthRemoteDataSource>(
       () => _i517.AuthRemoteDataSourceImpl(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i488.AuthRepository>(
+      () => _i328.AuthRepositoryImpl(
+        gh<_i517.AuthRemoteDataSource>(),
+        gh<_i558.FlutterSecureStorage>(),
+      ),
     );
     return this;
   }

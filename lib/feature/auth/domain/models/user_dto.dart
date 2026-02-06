@@ -12,16 +12,24 @@ class UserDto with _$UserDto {
   //using build runner
 
   const factory UserDto({
-    required String id,
-    required String email,
-    required String username,
+    String? id,
+    String? email,
+    @JsonKey(name: 'userName')
+    String? username, // Server returns 'userName', map to username
     String? token, //this will be used for authentication in future requests
+    String? profilePictureUrl,
+    bool? online,
+    String? role,
   }) = _UserDto;
 
   factory UserDto.fromJson(Map<String, dynamic> json) =>
       _$UserDtoFromJson(json);
 
   UserEntity toEntity() {
-    return UserEntity(id: id, email: email, username: username);
+    return UserEntity(
+      id: id ?? '',
+      email: email ?? '',
+      username: username ?? '',
+    );
   }
 }
