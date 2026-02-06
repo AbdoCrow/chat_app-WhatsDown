@@ -21,4 +21,20 @@ class AuthController extends _$AuthController {
       (success) => state = const AsyncData(null),
     );
   }
+
+  Future<void> register(String email, String username, String password) async {
+    state = const AsyncLoading();
+
+    final repository = GetIt.I<AuthRepository>();
+    final result = await repository.register(
+      email: email,
+      username: username,
+      password: password,
+    );
+
+    result.fold(
+      (failure) => state = AsyncError(failure.message, StackTrace.current),
+      (success) => state = const AsyncData(null),
+    );
+  }
 }

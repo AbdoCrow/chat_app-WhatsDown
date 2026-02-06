@@ -16,14 +16,12 @@ class ServerFailure extends Failure {
 
 /// Failure for network/connectivity errors
 class NetworkFailure extends Failure {
-  const NetworkFailure([String message = 'No internet connection'])
-    : super(message);
+  const NetworkFailure([super.message = 'No internet connection']);
 }
 
 /// Failure for cache/local storage errors
 class CacheFailure extends Failure {
-  const CacheFailure([String message = 'Cache error occurred'])
-    : super(message);
+  const CacheFailure([super.message = 'Cache error occurred']);
 }
 
 /// Failure for authentication errors

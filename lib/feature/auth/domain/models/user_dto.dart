@@ -1,6 +1,6 @@
 //here I will parse the data from raw json to DTO
 import 'package:freezed_annotation/freezed_annotation.dart';
-//import 'package:chat_app/feature/auth/domain/entities/user_entity.dart';
+import 'package:chat_app/feature/auth/domain/entities/user_entity.dart';
 
 part 'user_dto.freezed.dart';
 part 'user_dto.g.dart';
@@ -21,12 +21,7 @@ class UserDto with _$UserDto {
   factory UserDto.fromJson(Map<String, dynamic> json) =>
       _$UserDtoFromJson(json);
 
-  // Uncomment when UserEntity is defined:
-  // UserEntity toEntity() {
-  //   return UserEntity(
-  //     id: id,
-  //     email: email,
-  //     username: username,
-  //   );
-  // }
+  UserEntity toEntity() {
+    return UserEntity(id: id, email: email, username: username);
+  }
 }

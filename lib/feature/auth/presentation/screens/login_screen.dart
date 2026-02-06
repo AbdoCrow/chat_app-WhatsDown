@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:chat_app/core/theme/app_colors.dart';
 import 'package:chat_app/core/validation/validators.dart';
 import 'package:chat_app/core/router/router.dart';
+import 'package:chat_app/feature/auth/presentation/auth_controller.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
-  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -25,20 +26,32 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _onLoginPressed() {
+  Future<void> _onLoginPressed() async {
     if (_formKey.currentState!.validate()) {
-      setState(() => _isLoading = true);
+      await ref
+          .read(authControllerProvider.notifier)
+          .login(_emailController.text.trim(), _passwordController.text);
 
-      // Simulate login delay
-      Future.delayed(const Duration(seconds: 1), () {
-        setState(() => _isLoading = false);
+      final state = ref.read(authControllerProvider);
+      if (state is! AsyncError && mounted) {
         context.goToHome();
-      });
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final authState = ref.watch(authControllerProvider);
+    final isLoading = authState is AsyncLoading;
+
+    ref.listen(authControllerProvider, (previous, next) {
+      if (next is AsyncError) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(next.error.toString())));
+      }
+    });
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -182,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: double.infinity,
                   height: 52,
                   child: ElevatedButton(
-                    onPressed: _isLoading ? null : _onLoginPressed,
+                    onPressed: isLoading ? null : _onLoginPressed,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.secondary,
                       foregroundColor: Colors.white,
@@ -191,7 +204,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       elevation: 0,
                     ),
-                    child: _isLoading
+                    child: isLoading
                         ? const SizedBox(
                             width: 24,
                             height: 24,

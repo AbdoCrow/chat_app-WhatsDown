@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:chat_app/core/theme/app_colors.dart';
 import 'package:chat_app/core/validation/validators.dart';
 import 'package:chat_app/core/router/router.dart';
+import 'package:chat_app/feature/auth/presentation/auth_controller.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  ConsumerState<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -19,7 +21,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _confirmPasswordController = TextEditingController();
   bool _obscurePassword = true;
   bool _obscureConfirmPassword = true;
-  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -30,20 +31,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
     super.dispose();
   }
 
-  void _onRegisterPressed() {
+  Future<void> _onRegisterPressed() async {
     if (_formKey.currentState!.validate()) {
-      setState(() => _isLoading = true);
+      await ref
+          .read(authControllerProvider.notifier)
+          .register(
+            _emailController.text.trim(),
+            _usernameController.text.trim(),
+            _passwordController.text,
+          );
 
-      // Simulate registration delay
-      Future.delayed(const Duration(seconds: 1), () {
-        setState(() => _isLoading = false);
+      final state = ref.read(authControllerProvider);
+      if (state is! AsyncError && mounted) {
         context.goToHome();
-      });
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final authState = ref.watch(authControllerProvider);
+    final isLoading = authState is AsyncLoading;
+
+    ref.listen(authControllerProvider, (previous, next) {
+      if (next is AsyncError) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(next.error.toString())));
+      }
+    });
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -307,7 +324,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   width: double.infinity,
                   height: 52,
                   child: ElevatedButton(
-                    onPressed: _isLoading ? null : _onRegisterPressed,
+                    onPressed: isLoading ? null : _onRegisterPressed,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.secondary,
                       foregroundColor: Colors.white,
@@ -316,7 +333,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       elevation: 0,
                     ),
-                    child: _isLoading
+                    child: isLoading
                         ? const SizedBox(
                             width: 24,
                             height: 24,
