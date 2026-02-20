@@ -11,6 +11,9 @@ import 'package:chat_app/feature/chat/presentation/screens/home_screen.dart';
 import 'package:chat_app/feature/chat/presentation/screens/chat_room_screen.dart';
 import 'package:chat_app/feature/settings/presentation/screens/settings_screen.dart';
 import 'package:chat_app/feature/profile/presentation/screens/my_profile_screen.dart';
+import 'package:chat_app/feature/dummy/dummy_feature_page.dart';
+import 'package:chat_app/feature/dummy/dummy_route_paths.dart';
+import 'package:chat_app/feature/dummy/dummy_route_names.dart';
 
 /// Riverpod provider for GoRouter
 final appRouterProvider = Provider<GoRouter>((ref) {
@@ -96,6 +99,12 @@ class AppRouter {
       path: RoutePaths.profile,
       name: RouteNames.profile,
       builder: (context, state) => const MyProfileScreen(),
+    ),
+    // Dummy Feature Screen
+    GoRoute(
+      path: DummyRoutePaths.dummy,
+      name: DummyRouteNames.dummy,
+      builder: (context, state) => const DummyFeaturePage(),
     ),
   ];
 }

@@ -107,6 +107,13 @@ class _HomeScreenState extends State<HomeScreen>
             icon: const Icon(Icons.search, color: Colors.white),
             onPressed: _showSearchBottomSheet,
           ),
+          IconButton(
+            icon: const Icon(Icons.bug_report, color: Colors.white),
+            tooltip: 'Dummy Feature',
+            onPressed: () {
+              context.push('/dummy');
+            },
+          ),
           PopupMenuButton<String>(
             icon: const Icon(Icons.more_vert, color: Colors.white),
             onSelected: (value) {
