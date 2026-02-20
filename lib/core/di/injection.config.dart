@@ -19,6 +19,8 @@ import '../../feature/auth/domain/datasources/auth_remote_datasource.dart'
 import '../../feature/auth/domain/repositories/auth_repository.dart' as _i488;
 import '../../feature/auth/domain/repositories/auth_repository_impl.dart'
     as _i328;
+import '../../feature/auth/domain/repositories/auth_repository_mock.dart'
+    as _i119;
 import 'register_module.dart' as _i291;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -32,6 +34,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i361.Dio>(() => registerModule.dio);
     gh.lazySingleton<_i558.FlutterSecureStorage>(
       () => registerModule.secureStorage,
+    );
+    gh.lazySingleton<_i488.AuthRepository>(
+      () => _i119.AuthRepositoryMock(),
+      instanceName: 'mock',
     );
     gh.lazySingleton<_i517.AuthRemoteDataSource>(
       () => _i517.AuthRemoteDataSourceImpl(gh<_i361.Dio>()),
