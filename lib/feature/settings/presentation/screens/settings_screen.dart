@@ -148,6 +148,78 @@ class SettingsScreen extends StatelessWidget {
             title: 'Invite a friend',
             onTap: () {},
           ),
+          SettingsTile(
+            icon: Icons.help,
+            iconBackgroundColor: const Color.fromARGB(255, 73, 69, 28),
+            title: 'About App',
+            subtitle: 'Know us more!!!',
+            onTap: () {
+              showAboutDialog(
+                context: context,
+                applicationName: "Coming Soon...♥",
+                applicationVersion: "1.0.0",
+                applicationLegalese: "© 2026 My Company",
+              );
+            },
+          ),
+          SettingsTile(
+            icon: Icons.games,
+            iconBackgroundColor: const Color.fromARGB(255, 9, 100, 143),
+            title: 'Games',
+            subtitle: 'Time to Playyy!!!',
+            onTap: () {
+              final scaffoldContext = context;
+
+              showDialog(
+                context: scaffoldContext,
+                builder: (dialogContext) {
+                  return AlertDialog(
+                    title: Text('Number Grid Game'),
+                    content: SizedBox(
+                      width: double.maxFinite,
+                      height: 400,
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        itemCount: 10,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 5,
+                          crossAxisSpacing: 8,
+                          mainAxisSpacing: 8,
+                        ),
+                        itemBuilder: (context, index) {
+                          return ElevatedButton(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text('BOOM!'),
+                                    content: Text('Boring Game ;)'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(
+                                          context,
+                                        ), 
+                                        child: Text('OK'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                            child: Text(
+                              index.toString(),
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
           const SizedBox(height: 20),
           // App info
           Center(
