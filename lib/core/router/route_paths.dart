@@ -7,4 +7,5 @@ abstract class RoutePaths {
   static const String chatRoom = '/chat/:name';
   static const String settings = '/settings';
   static const String profile = '/profile';
+  static const String status = '/status';
 }

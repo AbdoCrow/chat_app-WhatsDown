@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:chat_app/core/theme/app_colors.dart';
 import 'package:chat_app/feature/chat/presentation/screens/chat_list_screen.dart';
 import 'package:chat_app/core/router/router.dart';
+import 'package:chat_app/feature/status/presentation/screens/status_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -160,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen>
         controller: _tabController,
         children: const [
           ChatListScreen(),
-          Center(child: Text('Status')), //Replace with StatusScreen
+          StatusScreen(),
           Center(child: Text('Calls')), //Replace with CallsScreen
         ],
       ),
