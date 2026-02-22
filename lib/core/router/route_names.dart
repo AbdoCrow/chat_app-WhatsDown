@@ -7,4 +7,5 @@ abstract class RouteNames {
   static const String chatRoom = 'chatRoom';
   static const String settings = 'settings';
   static const String profile = 'profile';
+  static const String status = 'status';
 }
