@@ -57,7 +57,7 @@ dependencies:
 
   #chat Specific
   scrollable_positioned_list: ^0.3.8
-  image_picker: ^1.1.2
+  image_picker: ^1.2.1
 
   cupertino_icons: ^1.0.8
 
