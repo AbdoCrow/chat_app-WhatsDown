@@ -139,8 +139,8 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
                     color: AppColors.secondary,
                     onTap: () => Navigator.pop(context),
                   ),
-                  const SizedBox(width: 70), // Spacer
-                  const SizedBox(width: 70), // Spacer
+                  const SizedBox(width: 70),
+                  const SizedBox(width: 70),
                 ],
               ),
             ],
@@ -264,7 +264,6 @@ class _AttachmentOption extends StatelessWidget {
   }
 }
 
-// Mock messages data
 const List<Map<String, dynamic>> _mockMessages = [
   {
     'text': 'ربنا يستر',
