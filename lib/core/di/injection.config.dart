@@ -21,6 +21,11 @@ import '../../feature/auth/domain/repositories/auth_repository_impl.dart'
     as _i328;
 import '../../feature/auth/domain/repositories/auth_repository_mock.dart'
     as _i119;
+import '../../feature/chat/domain/datasources/chat_remote_datasource.dart'
+    as _i1037;
+import '../../feature/chat/domain/repositories/chat_repository.dart' as _i167;
+import '../../feature/chat/domain/repositories/chat_repository_impl.dart'
+    as _i615;
 import 'register_module.dart' as _i291;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -41,6 +46,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i517.AuthRemoteDataSource>(
       () => _i517.AuthRemoteDataSourceImpl(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i167.ChatRepository>(
+      () => _i615.ChatRepositoryImpl(gh<_i1037.ChatRemoteDataSource>()),
     );
     gh.lazySingleton<_i488.AuthRepository>(
       () => _i328.AuthRepositoryImpl(

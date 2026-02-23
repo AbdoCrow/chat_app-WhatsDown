@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:chat_app/core/theme/app_colors.dart';
 import 'package:chat_app/feature/chat/presentation/screens/chat_list_screen.dart';
 import 'package:chat_app/core/router/router.dart';
+import 'package:chat_app/feature/chat/presentation/chat_controller.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
+class _HomeScreenState extends ConsumerState<HomeScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -105,7 +107,9 @@ class _HomeScreenState extends State<HomeScreen>
           ),
           IconButton(
             icon: const Icon(Icons.search, color: Colors.white),
-            onPressed: _showSearchBottomSheet,
+            onPressed: () {
+              ref.read(chatControllerProvider.notifier).clearQuery();
+            },
           ),
           IconButton(
             icon: const Icon(Icons.bug_report, color: Colors.white),
@@ -160,8 +164,8 @@ class _HomeScreenState extends State<HomeScreen>
         controller: _tabController,
         children: const [
           ChatListScreen(),
-          Center(child: Text('Status')), //Replace with StatusScreen
-          Center(child: Text('Calls')), //Replace with CallsScreen
+          Center(child: Text('Status')),
+          Center(child: Text('Calls')),
         ],
       ),
       floatingActionButton: ListenableBuilder(
@@ -170,7 +174,6 @@ class _HomeScreenState extends State<HomeScreen>
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Secondary FAB for Status tab (text status)
               if (_tabController.index == 1)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),
@@ -181,12 +184,10 @@ class _HomeScreenState extends State<HomeScreen>
                     child: Icon(Icons.edit, color: Colors.grey[700]),
                   ),
                 ),
-              // Main FAB
               FloatingActionButton(
                 heroTag: 'main_fab',
                 onPressed: () {
                   if (_tabController.index == 0) {
-                    // Navigate to select contact for new chat
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (_) => const SelectContactScreen(),
@@ -212,7 +213,6 @@ class _HomeScreenState extends State<HomeScreen>
   }
 }
 
-// Placeholder for navigation
 class SelectContactScreen extends StatelessWidget {
   const SelectContactScreen({super.key});
 
@@ -255,7 +255,6 @@ class SelectContactScreen extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          // New group option
           ListTile(
             leading: Container(
               width: 42,
@@ -314,7 +313,6 @@ class SelectContactScreen extends StatelessWidget {
               ),
             ),
           ),
-          // Mock contacts
           ..._mockContacts.map(
             (contact) => ListTile(
               leading: CircleAvatar(
