@@ -1,10 +1,11 @@
+import 'package:chat_app/feature/profile/presentation/widgets/Profile_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:chat_app/core/theme/app_colors.dart';
 
+
 class MyProfileScreen extends StatelessWidget {
   const MyProfileScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,31 +22,7 @@ class MyProfileScreen extends StatelessWidget {
           const SizedBox(height: 20),
           // Profile picture section
           Center(
-            child: Stack(
-              children: [
-                CircleAvatar(
-                  radius: 64,
-                  backgroundColor: Colors.grey[200],
-                  child: const Icon(Icons.person, size: 64, color: Colors.grey),
-                ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: const BoxDecoration(
-                      color: AppColors.secondary,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.camera_alt,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            child: ProfileIcon(),
           ),
           const SizedBox(height: 24),
           // Name section
